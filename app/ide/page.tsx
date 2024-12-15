@@ -1,25 +1,33 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Editor } from '@monaco-editor/react';
 import Terminal from './Terminal';
 import 'xterm/css/xterm.css';
 import Split from 'react-split';
+import FileTree from './tree';
 
-const folders = [
-  { name: 'src', files: ['index.tsx', 'app.tsx'] },
-  { name: 'public', files: ['index.html'] },
-  { name: 'styles', files: ['globals.css', 'tailwind.css'] },
-];
 
 const Page = () => {
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
-  const [editorContent, setEditorContent] = useState<string>(''); // Default empty
+  const [editorContent, setEditorContent] = useState<string>('');
+  const [fileTree, setFileTree] = useState<any>();
 
   const handleFileClick = (fileName: string) => {
     setSelectedFile(fileName);
     setEditorContent(`// You opened ${fileName}\nconsole.log('Hello, world!');`);
   };
+
+  const getFileTree = async () => {
+    const response = await fetch("http://localhost:9000/files");
+    const result = await response.json();
+    setFileTree(result.tree);
+  };
+
+  useEffect(() => {
+    getFileTree()
+  }, [])
+  
 
   return (
     <div className="h-screen flex flex-col">
@@ -31,24 +39,7 @@ const Page = () => {
       <Split className="split flex-grow" sizes={[25, 75]} minSize={200} gutterSize={8}>
         {/* Sidebar */}
         <div className="bg-gray-900 text-gray-300 p-4">
-          {folders.map((folder) => (
-            <div key={folder.name} className="mb-4">
-              <div className="font-bold text-gray-200">{folder.name}</div>
-              <ul className="pl-4">
-                {folder.files.map((file) => (
-                  <li
-                    key={file}
-                    className={`cursor-pointer ${
-                      selectedFile === file ? 'text-blue-400' : 'text-gray-300'
-                    } hover:text-white`}
-                    onClick={() => handleFileClick(file)}
-                  >
-                    {file}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <FileTree tree={fileTree}/>
         </div>
         {/* Editor and Terminal */}
         <div className="flex flex-col flex-grow bg-gray-800">
