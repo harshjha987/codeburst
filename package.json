@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@liveblocks/client": "^2.14.0",
+    "@liveblocks/react": "^2.14.0",
+    "@liveblocks/yjs": "^2.14.0",
     "@monaco-editor/react": "^4.6.0",
     "@radix-ui/react-dropdown-menu": "^2.1.2",
     "@radix-ui/react-label": "^2.1.0",
@@ -29,7 +32,10 @@
     "split.js": "^1.6.5",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "xterm": "^5.3.0"
+    "xterm": "^5.3.0",
+    "y-monaco": "^0.1.6",
+    "y-protocols": "^1.0.6",
+    "yjs": "^13.6.20"
   },
   "devDependencies": {
     "@types/node": "^20",

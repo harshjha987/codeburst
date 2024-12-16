@@ -1,11 +1,12 @@
+// Page.js
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Editor } from '@monaco-editor/react';
 import Terminal from './Terminal';
 import 'xterm/css/xterm.css';
 import Split from 'react-split';
 import FileTree from './tree';
+import Editor from './Editor';
 import socket from '@/components/globals/socket';
 
 const Page = () => {
@@ -14,7 +15,7 @@ const Page = () => {
   const [fileTree, setFileTree] = useState<any>();
 
   const getFileTree = async () => {
-    const response = await fetch("http://localhost:9000/files");
+    const response = await fetch('http://localhost:9000/files');
     const result = await response.json();
     setFileTree(result.tree);
   };
@@ -27,9 +28,9 @@ const Page = () => {
 
   const saveFile = async () => {
     if (!selectedFile) return;
-    await fetch("http://localhost:9000/files/save", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    await fetch('http://localhost:9000/files/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ path: selectedFile, content: editorContent }),
     });
     socket.emit('file:change', { path: selectedFile, content: editorContent });
@@ -40,9 +41,9 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
-    socket.on("file:refresh", getFileTree);
+    socket.on('file:refresh', getFileTree);
     return () => {
-      socket.off("file:refresh", getFileTree);
+      socket.off('file:refresh', getFileTree);
     };
   }, []);
 
@@ -84,14 +85,11 @@ const Page = () => {
         {/* Editor and Terminal */}
         <div className="flex flex-col flex-grow bg-gray-800">
           {/* Editor */}
-          {selectedFile && <p>{selectedFile.replaceAll("/", " > ")}</p>}
+          {selectedFile && <p>{selectedFile.replaceAll('/', ' > ')}</p>}
           <div className="flex-grow">
             <Editor
-              height="100%"
-              theme="vs-dark"
-              defaultLanguage="typescript"
-              value={editorContent}
-              onChange={(value) => setEditorContent(value || '')}
+              content={editorContent}
+              onContentChange={(value) => setEditorContent(value)}
             />
           </div>
           {/* Terminal */}
