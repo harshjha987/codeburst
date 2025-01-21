@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^6.9.15",
     "@liveblocks/client": "^2.14.0",
+    "@liveblocks/node": "^2.16.1",
     "@liveblocks/react": "^2.14.0",
     "@liveblocks/yjs": "^2.14.0",
     "@monaco-editor/react": "^4.6.0",

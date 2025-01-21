@@ -7,13 +7,9 @@ import "xterm/css/xterm.css";
 import Split from "react-split";
 import FileTree from "./tree";
 import Editor from "./Editor";
-import socket from "@/components/globals/socket";
-import {
-  LiveblocksProvider,
-  RoomProvider,
-  ClientSideSuspense,
-} from "@liveblocks/react/suspense";
-import CollaborativeEditor from "./CollaborativeEditor";
+import socket from "../../components/globals/socket";
+import { Room } from "./Room";
+import { CollaborativeEditor } from "./CollaborativeEditor";
 
 const Page = () => {
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
@@ -103,20 +99,12 @@ const Page = () => {
           {/* Editor */}
           {selectedFile && <p>{selectedFile.replaceAll("/", " > ")}</p>}
           <div className="flex-grow">
-            <LiveblocksProvider
-              publicApiKey={
-                "pk_dev_CfqgJ_ja-o_6H5QxrB6Mf9AgITPtJUh8F3bKDRvmyNRgRh9b2Ej3XR_PTfovljJ8"
-              }
-            >
-              <RoomProvider id="my-room">
-                <ClientSideSuspense fallback={<div>Loading…</div>}>
-                  <CollaborativeEditor
-                    content={editorContent}
-                    onContentChange={(value) => setEditorContent(value)}
-                  />
-                </ClientSideSuspense>
-              </RoomProvider>
-            </LiveblocksProvider>
+            <Room>
+              <CollaborativeEditor
+                content={editorContent}
+                onContentChange={(value:any) => setEditorContent(value)}
+              />
+            </Room>
           </div>
           {/* Terminal */}
           <div className="bg-gray-900" style={{ height: 150 }}>
