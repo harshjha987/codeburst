@@ -4,7 +4,6 @@ import * as Y from "yjs";
 import { LiveblocksYjsProvider } from "@liveblocks/yjs";
 import { useRoom } from "@liveblocks/react/suspense";
 import { useCallback, useEffect, useState } from "react";
-import { Avatars } from "./Avatars";
 import { Editor } from "@monaco-editor/react";
 import { editor } from "monaco-editor";
 import { MonacoBinding } from "y-monaco";
@@ -60,7 +59,6 @@ export function CollaborativeEditor({
   return (
     <div className="flex flex-col relative rounded-lg bg-white w-full h-full text-gray-900 overflow-hidden">
       {provider ? <Cursors yProvider={provider} /> : null}
-      <Avatars />
       <div className="relative flex-grow">
         <Editor
           onMount={handleOnMount}
