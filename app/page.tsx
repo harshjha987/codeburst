@@ -171,13 +171,7 @@ export default function HomePage() {
                 <BookOpen className="w-4 h-4" />
                 <span>Docs</span>
               </Link>
-              <Link 
-                  href="/ide"
-                  className="flex items-center space-x-2 bg-[#34A85A] text-white px-4 py-2 rounded-lg hover:bg-[#2d9350] transition-colors"
-                >
-                  <Rocket className="w-4 h-4" />
-                  <span> IDE</span>
-                </Link>
+              
               <ThemeToggle />
               <SignedIn>
                 <Link 
@@ -188,6 +182,13 @@ export default function HomePage() {
                   <span>Open IDE</span>
                 </Link>
                 <UserButton afterSignOutUrl="/" />
+                <Link 
+                  href="/dashboard"
+                  className="flex items-center space-x-2 bg-[#34A85A] text-white px-4 py-2 rounded-lg hover:bg-[#2d9350] transition-colors"
+                >
+                  <Rocket className="w-4 h-4" />
+                  <span> Dashboard</span>
+                </Link>
               </SignedIn>
               
               <SignedOut>
