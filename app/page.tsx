@@ -6,12 +6,16 @@ import Link from 'next/link';
 import { Menu, X, Code2, Users, MessageSquareShare, Video, Github, Terminal, Check, ChevronDown, ChevronUp, Twitter, Linkedin, Facebook, BookOpen, Rocket } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { useSessionData } from "@/app/context/session-context";
+
 
 export default function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const router = useRouter();
+   
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -147,6 +151,7 @@ export default function HomePage() {
       answer: "Yes, CodeBurst includes offline support. Changes are synchronized when you reconnect, and you can continue working without an internet connection using our desktop app."
     }
   ];
+  
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
@@ -174,6 +179,7 @@ export default function HomePage() {
               
               <ThemeToggle />
               <SignedIn>
+                
                 <Link 
                   href="/ide"
                   className="flex items-center space-x-2 bg-[#34A85A] text-white px-4 py-2 rounded-lg hover:bg-[#2d9350] transition-colors"
@@ -188,6 +194,10 @@ export default function HomePage() {
                 >
                   <Rocket className="w-4 h-4" />
                   <span> Dashboard</span>
+                </Link>
+                <Link href = "/profile">
+                <button className="flex items-center space-x-2 bg-[#34A85A] text-white px-4 py-2 rounded-lg hover:bg-[#2d9350] transition-colors" 
+                >Projects</button>
                 </Link>
               </SignedIn>
               
