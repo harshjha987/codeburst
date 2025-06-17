@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Menu, X, Code2, Users, MessageSquareShare, Video, Github, Terminal, Check, ChevronDown, ChevronUp, Twitter, Linkedin, Facebook, BookOpen, Rocket } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { useSessionData } from "@/app/context/session-context";
+
 
 
 export default function HomePage() {
